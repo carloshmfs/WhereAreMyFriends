@@ -17,12 +17,12 @@ public class EntityRendererMixin {
         method = "renderNameTag",
         at = @At(
             value = "INVOKE",
-            target = "Lcom/mojang/blaze3d/vertex/PoseStack;translate(DDD)V"
+            target = "Lcom/mojang/blaze3d/vertex/PoseStack;scale(FFF)V"
         ),
         remap = false
     )
-	private void cancelPoseStackTranslate(PoseStack poseStack, double x, double y, double z) {
-        return;
+	private void cancelPoseStackScale(PoseStack poseStack, float x, float y, float z) {
+        WhereAreMyFriends.LOGGER.info(String.format("%f %f %f", x, y, z));
 	}
 
 	@Redirect(
