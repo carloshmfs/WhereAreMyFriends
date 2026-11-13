@@ -2,6 +2,7 @@ package dev.robott11.client.mixin;
 
 import net.minecraft.client.renderer.entity.EntityRenderer;
 
+import org.joml.Quaternionf;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -22,5 +23,17 @@ public class EntityRendererMixin {
     )
 	private void cancelPoseStackTranslate(PoseStack poseStack, double x, double y, double z) {
         return;
+	}
+
+	@Redirect(
+        method = "renderNameTag",
+        at = @At(
+            value = "INVOKE",
+            target = "Lcom/mojang/blaze3d/vertex/PoseStack;mulPose(Lorg/joml/Quaternionf;)V"
+        ),
+        remap = false
+    )
+	private void cancelPoseStackMulPose(PoseStack poseStack, Quaternionf quaternionf) {
+        WhereAreMyFriends.LOGGER.info("cancelPoseStackMulPose()");
 	}
 }
