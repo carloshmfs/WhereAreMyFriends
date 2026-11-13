@@ -5,7 +5,6 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 
@@ -21,7 +20,7 @@ public class EntityRendererMixin {
         ),
         remap = false
     )
-	private void renderNameTagOverwrite(PoseStack poseStack, double x, double y, double z) {
-        WhereAreMyFriends.LOGGER.info("renderNameTage()");
+	private void cancelPoseStackTranslate(PoseStack poseStack, double x, double y, double z) {
+        return;
 	}
 }
